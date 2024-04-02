@@ -1,1 +1,2 @@
-# C++ numpy
+# XXX
+# numpy like C++
