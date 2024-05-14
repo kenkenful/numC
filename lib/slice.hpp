@@ -27,11 +27,15 @@ std::vector<std::string> split(std::string &&str){
     return res;
 }
 
+auto slice(std::vector<double> &&x, int a){
+    return x[a];
+}
+
 auto slice(std::vector<double> &x, int a){
     return x[a];
 }
 
-auto slice(std::vector<double> &x, const char *s){
+auto slice(std::vector<double> &&x, const char *s){
     auto vec = split(s);
     std::vector<double> res;
 
@@ -58,9 +62,19 @@ auto slice(std::vector<double> &x, const char *s){
         }
     }
     return res;
+
+}
+
+
+auto slice(std::vector<double> &x, const char *s){
+   return slice(std::move(x), s);
 }
 
 auto slice(std::vector<std::vector<double>> &x){
+    return x;
+}
+
+auto slice(std::vector<std::vector<double>> &&x){
     return x;
 }
 
@@ -68,12 +82,19 @@ auto slice(std::vector<std::vector<double>> &x, int a){
     return x[a];
 }
 
+auto slice(std::vector<std::vector<double>> &&x, int a){
+    return x[a];
+}
+
 auto slice(std::vector<std::vector<double>> &x, int a, int b){
     return x[a][b];
 }
 
+auto slice(std::vector<std::vector<double>> &&x, int a, int b){
+    return x[a][b];
+}
 
-auto slice(std::vector<std::vector<double>> &x, const char* s){
+auto slice(std::vector<std::vector<double>> &&x, const char* s){
     auto vec = split(s);
     std::vector<std::vector<double>>  res;
 
@@ -100,9 +121,15 @@ auto slice(std::vector<std::vector<double>> &x, const char* s){
         }
     }
     return res;
+
 }
 
-auto slice(std::vector<std::vector<double>> &x, const char* s, int a){
+auto slice(std::vector<std::vector<double>> &x, const char* s){
+    return slice(std::move(x), s);
+}
+
+
+auto slice(std::vector<std::vector<double>> &&x, const char* s, int a){
     auto vec = split(s);
     std::vector<double>  res;
 
@@ -129,9 +156,15 @@ auto slice(std::vector<std::vector<double>> &x, const char* s, int a){
         }
     }
     return res;
+
 }
 
-auto slice(std::vector<std::vector<double>> &x, int a ,const char* s){
+auto slice(std::vector<std::vector<double>> &x, const char* s, int a){
+    return slice(std::move(x), s, a);
+
+}
+
+auto slice(std::vector<std::vector<double>> &&x, int a ,const char* s){
     auto vec = split(s);
     std::vector<double>  res;
 
@@ -156,9 +189,15 @@ auto slice(std::vector<std::vector<double>> &x, int a ,const char* s){
         }
     }
     return res;
+
 }
 
-auto slice(std::vector<std::vector<double>> &x, const char* s ,const char* t){
+auto slice(std::vector<std::vector<double>> &x, int a ,const char* s){
+    return slice(std::move(x), a, s);
+}
+
+
+auto slice(std::vector<std::vector<double>> &&x, const char* s ,const char* t){
     auto vec1 = split(s);
     auto vec2 = split(t);
     std::vector<std::vector<double>>  res;
@@ -236,14 +275,12 @@ auto slice(std::vector<std::vector<double>> &x, const char* s ,const char* t){
                 res.emplace_back(vec);
             }
         }
-
     }else if(vec1[1] == ":" && vec1.size() == 2){   // 10:
         int rlen = stoi(vec1[0]);
         if(vec2[0] == ":" && vec2.size() == 1){         // :
             for(int i=rlen; i<x.size(); ++i){
                 res.emplace_back(x[i]);
             }
-
         }else if(vec2[0] == ":" && vec2.size() == 2){   // :10
             int clen = stoi(vec2[1]);
             for(int i=rlen; i<x.size(); ++i){
@@ -317,17 +354,13 @@ auto slice(std::vector<std::vector<double>> &x, const char* s ,const char* t){
     return res;
 }
 
-
-//template<typename T, class... Tail>
-//auto slice(std::vector<T> &x, int a){
- //   return x[a];
-    
-//}
-
+auto slice(std::vector<std::vector<double>> &x, const char* s ,const char* t){
+    return slice(std::move(x), s, t);
+}
 
 
 template <typename T, class... Tail>
-auto slice(std::vector<T> &x, const char* s, Tail&&... tail){
+auto slice(std::vector<T> &&x, const char* s, Tail&&... tail){
     auto vec = split(s);
     if(vec[0] == ":" && vec.size() == 1){         // :
         std::vector<decltype(slice(x[0], std::forward<Tail>(tail)...))> res;
@@ -359,7 +392,17 @@ auto slice(std::vector<T> &x, const char* s, Tail&&... tail){
         }
         return res;
     }
-    
+}
+
+template <typename T, class... Tail>
+auto slice(std::vector<T> &x, const char* s, Tail&&... tail){
+    return slice(std::move(x, s, std::forward<Tail>(tail)...));
+}
+
+
+template<typename T, class... Tail>
+auto slice(std::vector<T> &&x, int a, Tail&&... tail){
+    return slice(x[a], std::forward<Tail>(tail)...);
 }
 
 
