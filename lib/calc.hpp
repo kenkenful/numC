@@ -8,6 +8,8 @@
 #include "log.hpp"
 #include "cos.hpp"
 #include "sin.hpp"
+#include "tan.hpp"
+
 
 
 template<typename T>
