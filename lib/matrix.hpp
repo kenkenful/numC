@@ -5,19 +5,13 @@
 
 auto zeros(int a){
     std::vector<double> res(a);
-    for(int i=0; i<a ;++i){
-        res[i] = 0.0;
-    }
+
     return res;
 }
 
 auto zeros(int a, int b){
     std::vector<std::vector<double>> res(a, std::vector<double>(b));
-    for(int i=0; i<a ;++i){
-        for(int j=0;j<b;++j){
-            res[i][j] = 0.0;
-        }
-    }
+
     return res;
 }
 

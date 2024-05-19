@@ -13,7 +13,6 @@ auto random_rand(int a){
     // 離散一様分布 U(0, 1)
     // テンプレートパラメータを double にしているため, 生成される乱数は double 型整数
     std::uniform_real_distribution<double> dist(0, 1);
-    dist(engine);
 
     for(int i=0; i<a ;++i){
         res[i] = dist(engine);
@@ -30,7 +29,6 @@ auto random_rand(int a, int b){
     // 離散一様分布 U(0, 1)
     // テンプレートパラメータを double にしているため, 生成される乱数は double 型整数
     std::uniform_real_distribution<double> dist(0, 1);
-    dist(engine);
 
     for(int i=0; i<a ;++i){
         for(int j=0;j<b;++j){
