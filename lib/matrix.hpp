@@ -107,9 +107,3 @@ auto ones_like(std::vector<T> &w) {
     return res;
 }
 
-
-auto reshape(){
-
-
-    
-}

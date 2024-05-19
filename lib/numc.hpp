@@ -6,6 +6,7 @@
 #include "trans.hpp"
 #include "random.hpp"
 #include "matrix.hpp"
+#include "reshape.hpp"
 #include "print.hpp"
 
 
