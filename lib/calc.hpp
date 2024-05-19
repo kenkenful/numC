@@ -9,6 +9,7 @@
 #include "cos.hpp"
 #include "sin.hpp"
 #include "tan.hpp"
+#include "sqrt.hpp"
 
 
 

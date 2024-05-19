@@ -4,11 +4,6 @@
 
 auto exp(std::vector<double>&& x){
 
-    //std::vector<double> res;
-
-    //for(auto d : x){
-    //        res.emplace_back(exp(d));
-    // }
     std::vector<double> res(x.size());
 
     for(int i=0;i< x.size();++i){

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 bool print(double t, bool end = true){
   std::cout << t << std::endl;
