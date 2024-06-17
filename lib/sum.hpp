@@ -64,6 +64,24 @@ auto sum(std::vector<std::vector<double>> &a, int axis){
 
 
 template <typename T>
+auto sum(std::vector<T> &&a){
+    int res = 0;
+
+    for(auto &i : a){
+        res = sum(std::move(i));
+    }
+
+    return res;
+}
+
+template <typename T>
+auto sum(std::vector<T> &a){
+
+    return sum(std::move(a));
+}
+
+
+template <typename T>
 auto sum(std::vector<T> &&a, int axis){
     T res;
 
